@@ -28,17 +28,20 @@
         <h1 text-align:"center">Book a call</h1><br>
         <h3 text-align:"center">Book a free call and our representative will call you within one hour of scheduled time</h3>
         <br><br>
-            <form onsubmit="savetolocal(event)" class="form-check" novalidate>
+            <form id="addform" onsubmit="savetolocal(event)" class="form-check" novalidate>
                 <label>Name</label><br>
-                <input type="text" name="name" class="form-control-md" required<br><br>
+                <input type="text" id="name" name="name" class="form-control-md" required<br><br>
                 <label>Mobile No.</label><br>
-                <input type="tel" name="phone" class="form-control-md" required><br><br>
+                <input type="tel" id="phone" name="phone" class="form-control-md" required><br><br>
                 <label>Email</label><br>
-                <input type="email" name="email" class="form-control-md" required><br><br>
+                <input type="email" id="email" name="email" class="form-control-md" required><br><br>
                 <label>Time for call</label><br>
                 <input type="datetime-local" name="date" class="form-control-md" required><br><br>
-                <input type="submit" name="submit" value="Get a call" style="background-color: coral;">
+                <input type="submit" id='btn' name="submit" value="Get a call" style="background-color: coral;"><br><br>
             </form>
+            <ul id="items" class="list-group">
+                <li class="list-group-item"></li>
+            </ul>                
         <script src=booking_app.js></script>
 </body>
 </html>
