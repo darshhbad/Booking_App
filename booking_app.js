@@ -38,6 +38,21 @@ function local(e){
     localStorage.removeItem(f3.value);
     uli.removeChild(parent);
   }
+  let edits=document.createElement('button');
+  let texts=document.createTextNode("edit");
+  edits.appendChild(texts);
+  parent.appendChild(edits);
+  uli.appendChild(parent);
+
+  edits.addEventListener('click',edit)
+  function edit(e){
+    e.preventDefault();
+    f3.value=myobj.email;
+    f2.value=myobj.phone;
+    f1.value=myobj.name;
+    localStorage.removeItem(f3.value);
+    uli.removeChild(parent);
+  }
 
   let myobj_serial=JSON.stringify(myobj);
   localStorage.setItem(f3.value,myobj_serial);
