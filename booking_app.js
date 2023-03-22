@@ -54,9 +54,15 @@ function local(e){
     uli.removeChild(parent);
   }
 
-  let myobj_serial=JSON.stringify(myobj);
-  localStorage.setItem(f3.value,myobj_serial);
-
+  // let myobj_serial=JSON.stringify(myobj);
+  // localStorage.setItem(f3.value,myobj_serial);
+  axios.post("https://crudcrud.com/api/7aacc728615c4d10a5c5bc477525b193/appointmentdata/",myobj)
+  .then((response) =>{
+    console.log(response)
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
 
 
 }
