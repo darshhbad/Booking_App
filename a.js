@@ -1,4 +1,5 @@
 var a=0;
+load()
 function savetolocal(event){
     event.preventDefault();
     const name=event.target.name.value;
@@ -10,7 +11,7 @@ function savetolocal(event){
         phone:phone,
     }
     if (a==0){
-    axios.post("https://crudcrud.com/api/671e6c124e834827bdf70c7fe2e38416/data",obj)
+    axios.post("https://crudcrud.com/api/b72b521bc0b24dfcad935c735b865ab4/data",obj)
     .then((response) =>{
       showonscreen(response.data)  
       console.log(response)
@@ -21,7 +22,7 @@ function savetolocal(event){
     //showonscreen(obj)
 }
     else{
-        axios.put(`https://crudcrud.com/api/671e6c124e834827bdf70c7fe2e38416/data/${b}`,obj)
+        axios.put(`https://crudcrud.com/api/b72b521bc0b24dfcad935c735b865ab4/data/${b}`,obj)
         .then((response)=>{
             reload();
         })
@@ -42,7 +43,7 @@ function showonscreen(obj){
     deletebtn.type="button"
     deletebtn.value="Delete"
     deletebtn.onclick=()=>{
-        axios.delete(`https://crudcrud.com/api/671e6c124e834827bdf70c7fe2e38416/data/${b}`)
+        axios.delete(`https://crudcrud.com/api/b72b521bc0b24dfcad935c735b865ab4/data/${b}`)
         .catch((err)=>{
             console.log(err)
         })
@@ -65,9 +66,8 @@ function showonscreen(obj){
     parent.appendChild(child)
 }
 
-window.addEventListener("DOMContentLoaded",()=>{
-    
-    axios.get("https://crudcrud.com/api/671e6c124e834827bdf70c7fe2e38416/data")
+function load(){
+    axios.get("https://crudcrud.com/api/b72b521bc0b24dfcad935c735b865ab4/data")
     .then((res)=>{
       console.log(res)
       for(var i=0;i<res.data.length;i++){
@@ -77,11 +77,11 @@ window.addEventListener("DOMContentLoaded",()=>{
     .catch((error)=>{
       console.log(error)
     })  
-  })
+  }
 
 function reload(){
     a=0
-    axios.get(`https://crudcrud.com/api/671e6c124e834827bdf70c7fe2e38416/data/${b}`)
+    axios.get(`https://crudcrud.com/api/b72b521bc0b24dfcad935c735b865ab4/data/${b}`)
     .then((res)=>{
       showonscreen(res.data)
       }
