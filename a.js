@@ -22,10 +22,9 @@ function savetolocal(event){
 }
     else{
         axios.put(`https://crudcrud.com/api/671e6c124e834827bdf70c7fe2e38416/data/${b}`,obj)
-        .then((response) =>{
-            showonscreen(response.data)  
-            console.log(response)
-          })
+        .then((response)=>{
+            reload();
+        })
         .catch((err)=>{
             console.log(err)
         })
@@ -79,5 +78,17 @@ window.addEventListener("DOMContentLoaded",()=>{
       console.log(error)
     })  
   })
+
+function reload(){
+    a=0
+    axios.get(`https://crudcrud.com/api/671e6c124e834827bdf70c7fe2e38416/data/${b}`)
+    .then((res)=>{
+      showonscreen(res.data)
+      }
+    )
+    .catch((error)=>{
+      console.log(error)
+    })  
+}
 
  
