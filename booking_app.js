@@ -18,7 +18,7 @@ let forms=document.getElementById("btn")
 
 forms.addEventListener('click',local)
 function local(e){
-  e.preventDefault();
+  e.preventDefault()
   let myobj={
     name:f1.value,
     email:f3.value,
@@ -66,8 +66,55 @@ function local(e){
 
 
 }
+window.addEventListener("DOMContentLoaded",()=>{
+  axios.get("https://crudcrud.com/api/7aacc728615c4d10a5c5bc477525b193/appointmentdata/")
+  .then((res)=>{
+    console.log(res)
+    for(var i=0;i<res.data.length;i++){
+      showuser(res.data[i])
+    }
+  })
+  .catch((error)=>{
+    console.log(error)
+  })  
+})
 
+function showuser(e){
+  let myobj={
+    name:f1.value,
+    email:f3.value,
+    phone:f2.value
+  }
+  let parent=document.createElement('li');
+  parent.textContent=myobj.name+" "+myobj.email+" "+myobj.phone;
+  let deletes=document.createElement('button');
+  let text=document.createTextNode("delete");
+  deletes.appendChild(text);
+  parent.appendChild(deletes);
+  uli.appendChild(parent);
 
+  deletes.addEventListener('click',remove)
+  function remove(e){
+    e.preventDefault();
+    localStorage.removeItem(f3.value);
+    uli.removeChild(parent);
+  }
+  let edits=document.createElement('button');
+  let texts=document.createTextNode("edit");
+  edits.appendChild(texts);
+  parent.appendChild(edits);
+  uli.appendChild(parent);
+
+  edits.addEventListener('click',edit)
+  function edit(e){
+    e.preventDefault();
+    f3.value=myobj.email;
+    f2.value=myobj.phone;
+    f1.value=myobj.name;
+    localStorage.removeItem(f3.value);
+    uli.removeChild(parent);
+  }
+}
 
 
 
