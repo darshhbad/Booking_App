@@ -1,3 +1,4 @@
+var a=0;
 function savetolocal(event){
     event.preventDefault();
     const name=event.target.name.value;
@@ -8,7 +9,8 @@ function savetolocal(event){
         email:email,
         phone:phone,
     }
-    axios.post("https://crudcrud.com/api/c34d0b78847c408a92b76a90db9261d0/data",obj)
+    if (a==0){
+    axios.post("https://crudcrud.com/api/671e6c124e834827bdf70c7fe2e38416/data",obj)
     .then((response) =>{
       showonscreen(response.data)  
       console.log(response)
@@ -17,6 +19,18 @@ function savetolocal(event){
       console.log(err)
     })
     //showonscreen(obj)
+}
+    else{
+        axios.put(`https://crudcrud.com/api/671e6c124e834827bdf70c7fe2e38416/data/${b}`,obj)
+        .then((response) =>{
+            showonscreen(response.data)  
+            console.log(response)
+          })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
+
 }
 function showonscreen(obj){
     const parent=document.getElementById('items')
@@ -29,7 +43,7 @@ function showonscreen(obj){
     deletebtn.type="button"
     deletebtn.value="Delete"
     deletebtn.onclick=()=>{
-        axios.delete(`https://crudcrud.com/api/c34d0b78847c408a92b76a90db9261d0/data/${b}`)
+        axios.delete(`https://crudcrud.com/api/671e6c124e834827bdf70c7fe2e38416/data/${b}`)
         .catch((err)=>{
             console.log(err)
         })
@@ -40,10 +54,11 @@ function showonscreen(obj){
     editbtn.type="button"
     editbtn.value="Edit"
     editbtn.onclick=()=>{
+        a=1
         document.getElementById("name").value=obj.name
         document.getElementById("phone").value=obj.phone
         document.getElementById("email").value=obj.email
-        localStorage.removeItem(obj.email)
+        
         parent.removeChild(child)
     }
     child.appendChild(editbtn)
@@ -52,7 +67,8 @@ function showonscreen(obj){
 }
 
 window.addEventListener("DOMContentLoaded",()=>{
-    axios.get("https://crudcrud.com/api/c34d0b78847c408a92b76a90db9261d0/data")
+    
+    axios.get("https://crudcrud.com/api/671e6c124e834827bdf70c7fe2e38416/data")
     .then((res)=>{
       console.log(res)
       for(var i=0;i<res.data.length;i++){
@@ -63,3 +79,5 @@ window.addEventListener("DOMContentLoaded",()=>{
       console.log(error)
     })  
   })
+
+ 
