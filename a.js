@@ -6,9 +6,9 @@ function savetolocal(event){
     const obj={
         name:name,
         email:email,
-        phone:phone
+        phone:phone,
     }
-    axios.post("https://crudcrud.com/api/033772d7d5ec44ebbb916089cbc55b79/appointmentdata/",obj)
+    axios.post("https://crudcrud.com/api/c34d0b78847c408a92b76a90db9261d0/data",obj)
     .then((response) =>{
       showonscreen(response.data)  
       console.log(response)
@@ -18,30 +18,21 @@ function savetolocal(event){
     })
     //showonscreen(obj)
 }
-
-window.addEventListener("DOMContentLoaded",()=>{
-    axios.get("https://crudcrud.com/api/033772d7d5ec44ebbb916089cbc55b79/appointmentdata/")
-    .then((res)=>{
-      console.log(res)
-      for(var i=0;i<res.data.length;i++){
-        showonscreen(res.data[i])
-      }
-    })
-    .catch((error)=>{
-      console.log(error)
-    })  
-  })
-
 function showonscreen(obj){
     const parent=document.getElementById('items')
     const child=document.createElement('li')
+    child.id=obj._id
+    b=obj._id
     child.textContent=obj.name+" "+obj.email+" "+obj.phone
 
     const deletebtn=document.createElement('input')
     deletebtn.type="button"
     deletebtn.value="Delete"
     deletebtn.onclick=()=>{
-        localStorage.removeItem(obj.email)
+        axios.delete(`https://crudcrud.com/api/c34d0b78847c408a92b76a90db9261d0/data/${b}`)
+        .catch((err)=>{
+            console.log(err)
+        })
         parent.removeChild(child)
     }
 
@@ -59,3 +50,16 @@ function showonscreen(obj){
     child.appendChild(deletebtn)
     parent.appendChild(child)
 }
+
+window.addEventListener("DOMContentLoaded",()=>{
+    axios.get("https://crudcrud.com/api/c34d0b78847c408a92b76a90db9261d0/data")
+    .then((res)=>{
+      console.log(res)
+      for(var i=0;i<res.data.length;i++){
+        showonscreen(res.data[i])
+      }
+    })
+    .catch((error)=>{
+      console.log(error)
+    })  
+  })
